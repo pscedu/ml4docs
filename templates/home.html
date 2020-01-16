@@ -61,7 +61,7 @@
             </tfoot>
         </table>
 
-        <table id="table_id" class="stripe">
+        <table id="table_id" class="display dt-body-center">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -92,7 +92,14 @@
                 src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
         <script>
             $(document).ready(function () {
-                $('#table_id').DataTable();
+                $('#table_id').DataTable({
+                    columnDefs: [
+                        {
+                            targets: "_all",
+                            className: 'dt-body-center'
+                        }
+                    ]
+                });
             });
         </script>
     </body>
