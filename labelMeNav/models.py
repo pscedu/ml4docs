@@ -1,5 +1,7 @@
 from django.db import models
 
+from labelMeNav import constants
+
 
 class Images(models.Model):
     name = models.CharField(max_length=200)
@@ -7,6 +9,17 @@ class Images(models.Model):
     human_tagged = models.BooleanField(default=False)
     model_tagged = models.BooleanField(default=False)
     pending = models.BooleanField(default=True)
+
+    @property
+    def status(self):
+        if self.human_tagged:
+            return constants.HUMAN_TAGGED
+        elif self.model_tagged:
+            return constants.MODEL_TAGGED
+        elif self.verified:
+            return constants.VERIFIED
+        else:
+            return constants.PENDING
 
     def set_verified(self):
         self.verified, self.pending = True, False

@@ -8,11 +8,63 @@
     <body>
         <h1>LabelMe Navigation</h1>
 
-        Color code convention:
 
-        <table id="table_id" style="width:100%">
+        <table>
             <thead>
                 <tr>
+                    <th colspan="2"><b>Color code convention</b></th>
+                </tr>
+                <tr>
+                    <th>Mode</th>
+                    <th>Color</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Human tagged</td>
+                    <td>
+                        <svg width="32" height="32">
+                            <rect width="32" height="32"
+                                  style="fill:rgb{{ color_code.0 }};stroke-width:3;stroke:rgb(0,0,0)"/>
+                        </svg>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Model tagged</td>
+                    <td>
+                        <svg width="32" height="32">
+                            <rect width="32" height="32"
+                                  style="fill:rgb{{ color_code.1 }};stroke-width:3;stroke:rgb(0,0,0)"/>
+                        </svg>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Pending</td>
+                    <td>
+                        <svg width="32" height="32">
+                            <rect width="32" height="32"
+                                  style="fill:rgb{{ color_code.2 }};stroke-width:3;stroke:rgb(0,0,0)"/>
+                        </svg>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Verified</td>
+                    <td>
+                        <svg width="32" height="32">
+                            <rect width="32" height="32"
+                                  style="fill:rgb{{ color_code.3 }};stroke-width:3;stroke:rgb(0,0,0)"/>
+                        </svg>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+
+        <table id="table_id" class="stripe">
+            <thead>
+                <tr>
+                    <th>Id</th>
                     <th>Status</th>
                     <th>URL</th>
                 </tr>
@@ -21,6 +73,12 @@
                 {% for image in images %}
                     <tr>
                         <td>{{ image.id }}</td>
+                        <td>
+                            <svg width="32" height="32">
+                                <rect width="32" height="32"
+                                      style="fill:rgb{{ image.status }};stroke-width:3;stroke:rgb(0,0,0)"/>
+                            </svg>
+                        </td>
                         <td>
                             <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.name }}.jpg">{{ image.name }}</a>
                         </td>
