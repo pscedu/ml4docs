@@ -2,5 +2,6 @@ HUMAN_TAGGED = (0, 128, 0)
 MODEL_TAGGED = (255, 165, 0)
 PENDING = (0, 255, 255)
 VERIFIED = (0, 153, 255)
-
 color_code = (HUMAN_TAGGED, MODEL_TAGGED, PENDING, VERIFIED)
+
+IMAGES_DIR_PATH = "/Users/juran/Downloads/unsamples"

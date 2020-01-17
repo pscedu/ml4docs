@@ -1,13 +1,14 @@
-from django import template
-from django.http import HttpResponse
+import glob
+
+from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.views import View
-import labelMeNav.models as models
+
 import labelMeNav.constants as constants
+import labelMeNav.models as models
 
 
 class Home(View):
-
     def get(self, request):
         template = loader.get_template('home.html')
         context = {
@@ -21,3 +22,25 @@ class Home(View):
         return HttpResponse(template.render(context, request))
 
     post = get
+
+
+class UpdateDb(View):
+    @staticmethod
+    def get_image_file_list():
+        files = glob.glob(constants.IMAGES_DIR_PATH + "/*jpg")
+        files = [file.replace(".jpg", "").replace(constants.IMAGES_DIR_PATH + "/", "") for file in files]
+        return files
+
+    def update_image_list_data(self):
+        files = set(self.get_image_file_list())
+
+        already_exist = set(models.Images.objects.filter(name__in=files).values_list('name', flat=True))
+        to_create = files - already_exist
+        for item in to_create:
+            models.Images.objects.create(name=item)
+
+        return to_create
+
+    def get(self, request):
+        created = list(self.update_image_list_data())
+        return JsonResponse(created, safe=False)

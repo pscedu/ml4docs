@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import Home
+import labelMeNav.views as views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', Home.as_view()),
+    path('', views.Home.as_view()),
+    path('update-db', views.UpdateDb.as_view()),
 ]
