@@ -66,6 +66,8 @@
                 <tr>
                     <th>Id</th>
                     <th>Status</th>
+                    <th>Pages</th>
+                    <th>Stamps</th>
                     <th>URL</th>
                 </tr>
             </thead>
@@ -79,6 +81,8 @@
                                       style="fill:rgb{{ image.status }};stroke-width:3;stroke:rgb(0,0,0)"/>
                             </svg>
                         </td>
+                        <td>1</td>
+                        <td>A (2), B (3), ?(9)</td>
                         <td>
                             <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.name }}.jpg">{{ image.name }}</a>
                         </td>
