@@ -7,4 +7,4 @@ class ImagesAdmin(admin.ModelAdmin):
     fields = ['name', ]
 
 
-admin.site.register(models.Images, ImagesAdmin)
+admin.site.register(models.Image, ImagesAdmin)

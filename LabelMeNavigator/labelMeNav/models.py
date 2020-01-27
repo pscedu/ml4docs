@@ -3,18 +3,28 @@ from django.db import models
 from labelMeNav import constants
 
 
-class Images(models.Model):
-    image_file_name = models.CharField(max_length=200)
+class ImageManager(models.Manager):
+    def update_statuses(self, machine_labeled_stamps: list = None, machine_labeled_pages: list = None):
+        if machine_labeled_stamps:
+            self.filter(image_file_name__in=machine_labeled_stamps).update(machine_stamps_complete=True)
+        elif machine_labeled_pages:
+            self.filter(image_file_name__in=machine_labeled_pages).update(machine_pages_complete=True)
+
+
+class Image(models.Model):
+    image_file = models.CharField(max_length=200)
     # End state of the data
-    human_stamps_complete = models.BooleanField(default=False)
-    human_pages_complete = models.BooleanField(default=False)
-    machine_stamps_complete = models.BooleanField(default=False)
-    machine_pages_complete = models.BooleanField(default=False)
+    human_labeled_stamps = models.BooleanField(default=False)
+    human_labeled_pages = models.BooleanField(default=False)
+    machine_labeled_stamps = models.BooleanField(default=False)
+    machine_labeled_pages = models.BooleanField(default=False)
+
+    objects = ImageManager()
 
     @property
     def pending(self):
-        return self.human_stamps_complete and self.human_pages_complete and \
-               self.machine_stamps_complete and self.machine_pages_complete
+        return self.human_labeled_stamps and self.human_labeled_pages and \
+               self.machine_labeled_stamps and self.machine_labeled_pages
 
     @property
     def verified(self):
@@ -22,13 +32,13 @@ class Images(models.Model):
 
     @property
     def status_color_rgb(self):
-        if self.human_stamps_complete:
+        if self.human_labeled_stamps:
             return constants.HUMAN_STAMPS_COMPLETE
-        elif self.human_pages_complete:
+        elif self.human_labeled_pages:
             return constants.HUMAN_PAGES_COMPLETE
-        elif self.machine_stamps_complete:
+        elif self.machine_labeled_stamps:
             return constants.MACHINE_PAGES_COMPLETE
-        elif self.machine_pages_complete:
+        elif self.machine_labeled_pages:
             return constants.MACHINE_STAMPS_COMPLETE
         else:
             return constants.PENDING
