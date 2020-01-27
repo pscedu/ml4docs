@@ -1,36 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
+
         <title>LabelMe Navigation</title>
     </head>
     <body>
-        <h2>ML Stamps - LabelMe Navigator</h2>
-        <h2>Campaign 1</h2>
-        <h3>Stamps To-do ({{ total_count }})</h3>
-        <ul>
-            {% for image in images %}
-                <li>
-                    <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.name }}.jpg">{{ image.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js"
-                integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-        <script type="text/javascript" charset="utf8"
-                src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('#table_id').DataTable({
-                    columnDefs: [
-                        {
-                            targets: "_all",
-                            className: 'dt-body-center'
-                        }
-                    ]
-                });
-            });
-        </script>
+
+        <div class="container-fluid">
+            <nav class="navbar navbar-dark bg-dark">
+                <span class="navbar-brand">
+                    ML Stamps - LabelMe Navigator
+                </span>
+            </nav>
+
+            <div class="row">
+                <div class="col">
+                    <h1>Campaign 1</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h3>Stamps To-do ({{ pending_stamps_count }})</h3>
+                    <ul>
+                        {% for image in pending_stamps %}
+                            <li>
+                                <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.image_file }}.jpg">{{ image.image_file }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Stamps DONE ({{ labeled_stamps_count }})</h3>
+                    <ul>
+                        {% for image in labeled_stamps %}
+                            <li>
+                                <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.image_file }}.jpg">{{ image.image_file }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h3>Pages To-do ({{ pending_pages_count }})</h3>
+                    <ul>
+                        {% for image in pending_pages %}
+                            <li>
+                                <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.image_file }}.jpg">{{ image.image_file }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Pages DONE ({{ labeled_pages_count }})</h3>
+                    <ul>
+                        {% for image in labeled_pages %}
+                            <li>
+                                <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.image_file }}.jpg">{{ image.image_file }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

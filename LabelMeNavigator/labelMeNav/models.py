@@ -10,6 +10,46 @@ class ImageManager(models.Manager):
         elif machine_labeled_pages:
             self.filter(image_file_name__in=machine_labeled_pages).update(machine_pages_complete=True)
 
+    def labeled_stamps(self):
+        return self.filter(human_labeled_stamps=True)
+
+    def pending_stamps(self):
+        return self.filter(human_labeled_stamps=False, machine_labeled_stamps=False)
+
+    def labeled_pages(self):
+        return self.filter(human_labeled_pages=True)
+
+    def pending_pages(self):
+        return self.filter(human_labeled_pages=False, machine_labeled_pages=False)
+
+    def get_next_pending_images(self):
+        labeled_stamps = self.labeled_stamps()
+        labeled_stamps_count = labeled_stamps.count()
+
+        pending_stamps = self.pending_stamps()
+        pending_stamps_count = pending_stamps.count()
+
+        labeled_pages = self.labeled_pages()
+        labeled_pages_count = labeled_pages.count()
+
+        pending_pages = self.pending_pages()
+        pending_pages_count = pending_pages.count()
+
+        context = {
+            "labeled_stamps": labeled_stamps[:10],
+            "labeled_stamps_count": labeled_stamps_count,
+
+            "pending_stamps": pending_stamps[:10],
+            "pending_stamps_count": pending_stamps_count,
+
+            "labeled_pages": labeled_pages[:10],
+            "labeled_pages_count": labeled_pages_count,
+
+            "pending_pages": pending_pages[:10],
+            "pending_pages_count": pending_pages_count,
+        }
+        return context
+
 
 class Image(models.Model):
     image_file = models.CharField(max_length=200)
