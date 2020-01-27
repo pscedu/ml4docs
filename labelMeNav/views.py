@@ -12,9 +12,10 @@ class Home(View):
     def get(self, request):
         template = loader.get_template('home.html')
         context = {
+            "total_count": models.Images.objects.all().count(),
             "color_code": constants.color_code,
             "folder_name": "Birds",
-            "images": models.Images.objects.all(),
+            "images": models.Images.objects.all()[:10],
             # "default_domain": request.build_absolute_uri()
             "default_domain": "http://128.237.138.63/"
         }
@@ -34,7 +35,7 @@ class UpdateDb(View):
     def update_image_list_data(self):
         files = set(self.get_image_file_list())
 
-        already_exist = set(models.Images.objects.filter(name__in=files).values_list('name', flat=True))
+        already_exist = set(models.Images.objects.filter(name__in=files).values_list('image_file_name', flat=True))
         to_create = files - already_exist
         for item in to_create:
             models.Images.objects.create(name=item)

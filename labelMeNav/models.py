@@ -5,6 +5,7 @@ from labelMeNav import constants
 
 class Images(models.Model):
     image_file_name = models.CharField(max_length=200)
+    # End state of the data
     human_stamps_complete = models.BooleanField(default=False)
     human_pages_complete = models.BooleanField(default=False)
     machine_stamps_complete = models.BooleanField(default=False)

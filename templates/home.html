@@ -3,93 +3,19 @@
     <head>
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>LabelMe Navigation</title>
     </head>
     <body>
-        <h1>LabelMe Navigation</h1>
-
-
-        <table>
-            <thead>
-                <tr>
-                    <th colspan="2"><b>Color code convention</b></th>
-                </tr>
-                <tr>
-                    <th>Mode</th>
-                    <th>Color</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Human tagged</td>
-                    <td>
-                        <svg width="32" height="32">
-                            <rect width="32" height="32"
-                                  style="fill:rgb{{ color_code.0 }};stroke-width:3;stroke:rgb(0,0,0)"/>
-                        </svg>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Model tagged</td>
-                    <td>
-                        <svg width="32" height="32">
-                            <rect width="32" height="32"
-                                  style="fill:rgb{{ color_code.1 }};stroke-width:3;stroke:rgb(0,0,0)"/>
-                        </svg>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Pending</td>
-                    <td>
-                        <svg width="32" height="32">
-                            <rect width="32" height="32"
-                                  style="fill:rgb{{ color_code.2 }};stroke-width:3;stroke:rgb(0,0,0)"/>
-                        </svg>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Verified</td>
-                    <td>
-                        <svg width="32" height="32">
-                            <rect width="32" height="32"
-                                  style="fill:rgb{{ color_code.3 }};stroke-width:3;stroke:rgb(0,0,0)"/>
-                        </svg>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-            </tfoot>
-        </table>
-
-        <table id="table_id" class="display dt-body-center">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Status</th>
-                    <th>Pages</th>
-                    <th>Stamps</th>
-                    <th>URL</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for image in images %}
-                    <tr>
-                        <td>{{ image.id }}</td>
-                        <td>
-                            <svg width="32" height="32">
-                                <rect width="32" height="32"
-                                      style="fill:rgb{{ image.status }};stroke-width:3;stroke:rgb(0,0,0)"/>
-                            </svg>
-                        </td>
-                        <td>1</td>
-                        <td>A (2), B (3), ?(9)</td>
-                        <td>
-                            <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.name }}.jpg">{{ image.name }}</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <h2>ML Stamps - LabelMe Navigator</h2>
+        <h2>Campaign 1</h2>
+        <h3>Stamps To-do ({{ total_count }})</h3>
+        <ul>
+            {% for image in images %}
+                <li>
+                    <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.name }}.jpg">{{ image.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"
                 integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
         <script type="text/javascript" charset="utf8"
