@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='Image',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image_file', models.CharField(max_length=200)),
+                ('image_name', models.CharField(max_length=200)),
                 ('human_labeled_stamps', models.BooleanField(default=False)),
                 ('human_labeled_pages', models.BooleanField(default=False)),
                 ('machine_labeled_stamps', models.BooleanField(default=False)),

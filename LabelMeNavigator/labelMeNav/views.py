@@ -25,14 +25,14 @@ class Home(View):
 
 
 class UpdateDb(View):
+    @staticmethod
+    def update_image_list_data():
+        files = set(utils.get_image_name_list())
 
-    def update_image_list_data(self):
-        files = set(utils.get_image_file_list())
-
-        already_exist = set(models.Image.objects.filter(image_file__in=files).values_list('image_file', flat=True))
+        already_exist = set(models.Image.objects.filter(image_name__in=files).values_list('image_name', flat=True))
         to_create = files - already_exist
         for item in to_create:
-            models.Image.objects.create(image_file=item)
+            models.Image.objects.create(image_name=item)
 
         return to_create
 

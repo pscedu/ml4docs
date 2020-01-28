@@ -31,7 +31,7 @@
                     <ul>
                         {% for image in pending_stamps %}
                             <li>
-                                <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.image_file }}.jpg">{{ image.image_file }}</a>
+                                <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.image_name }}.jpg">{{ image.image_name }}</a>
                             </li>
                         {% endfor %}
                     </ul>
@@ -41,7 +41,7 @@
                     <ul>
                         {% for image in labeled_stamps %}
                             <li>
-                                <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.image_file }}.jpg">{{ image.image_file }}</a>
+                                <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.image_name }}.jpg">{{ image.image_name }}</a>
                             </li>
                         {% endfor %}
                     </ul>
@@ -53,7 +53,7 @@
                     <ul>
                         {% for image in pending_pages %}
                             <li>
-                                <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.image_file }}.jpg">{{ image.image_file }}</a>
+                                <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.image_name }}.jpg">{{ image.image_name }}</a>
                             </li>
                         {% endfor %}
                     </ul>
@@ -63,7 +63,7 @@
                     <ul>
                         {% for image in labeled_pages %}
                             <li>
-                                <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.image_file }}.jpg">{{ image.image_file }}</a>
+                                <a href="{{ default_domain }}tool.html?collection=LabelMe&mode=f&folder={{ folder_name }}&image={{ image.image_name }}.jpg">{{ image.image_name }}</a>
                             </li>
                         {% endfor %}
                     </ul>

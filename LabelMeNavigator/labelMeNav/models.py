@@ -6,9 +6,9 @@ from labelMeNav import constants
 class ImageManager(models.Manager):
     def update_statuses(self, machine_labeled_stamps: list = None, machine_labeled_pages: list = None):
         if machine_labeled_stamps:
-            self.filter(image_file_name__in=machine_labeled_stamps).update(machine_stamps_complete=True)
+            self.filter(image_name__in=machine_labeled_stamps).update(machine_stamps_complete=True)
         elif machine_labeled_pages:
-            self.filter(image_file_name__in=machine_labeled_pages).update(machine_pages_complete=True)
+            self.filter(image_name__in=machine_labeled_pages).update(machine_pages_complete=True)
 
     def labeled_stamps(self):
         return self.filter(human_labeled_stamps=True)
@@ -52,7 +52,7 @@ class ImageManager(models.Manager):
 
 
 class Image(models.Model):
-    image_file = models.CharField(max_length=200)
+    image_name = models.CharField(max_length=200)
     # End state of the data
     human_labeled_stamps = models.BooleanField(default=False)
     human_labeled_pages = models.BooleanField(default=False)

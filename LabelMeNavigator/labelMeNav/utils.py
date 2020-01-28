@@ -5,14 +5,14 @@ from labelMeNav import constants
 from labelMeNav import models
 
 
-def get_image_files(directory: str = None) -> list:
+def get_image_names(directory: str = None) -> list:
     files = glob.glob(directory + "/*jpg")
     files = [file.replace(".jpg", "").replace(directory + "/", "") for file in files]
     return files
 
 
-def get_image_file_list():
-    return get_image_files(directory=constants.IMAGES_DIR_PATH)
+def get_image_name_list():
+    return get_image_names(directory=constants.IMAGES_DIR_PATH)
 
 
 def machine_labeled_updater():
@@ -25,7 +25,7 @@ def machine_labeled_updater():
     # Get newly labeled file names
     machine_labeled_stamps = []
     machine_labeled_pages = []
-    files = get_image_files(directory=constants.NEW_ANNOTATIONS_DIR_PATH)
+    files = get_image_names(directory=constants.NEW_ANNOTATIONS_DIR_PATH)
 
     # Parse the file names and divide them into stamps or pages. Removing prefix as it is not necessary after this.
     for file in files:
