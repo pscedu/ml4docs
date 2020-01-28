@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.Home.as_view()),
     path('update-db', views.UpdateDb.as_view()),
+    path('get-status/<str:image_name>', views.GetStatus.as_view()),
 ]

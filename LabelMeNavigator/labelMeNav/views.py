@@ -39,3 +39,12 @@ class UpdateDb(View):
     def get(self, request):
         created = list(self.update_image_list_data())
         return JsonResponse(created, safe=False)
+
+
+class GetStatus(View):
+    def get(self, request, image_name: str = "") -> JsonResponse:
+        image = models.Image.objects.filter(image_name=image_name).first()
+        if image:
+            return JsonResponse(image.status_dict, safe=False)
+        else:
+            return JsonResponse({}, safe=False)

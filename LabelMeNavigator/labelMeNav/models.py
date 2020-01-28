@@ -62,6 +62,15 @@ class Image(models.Model):
     objects = ImageManager()
 
     @property
+    def status_dict(self):
+        return {
+            "human_labeled_stamps": self.human_labeled_stamps,
+            "human_labeled_pages": self.human_labeled_pages,
+            "machine_labeled_stamps": self.machine_labeled_stamps,
+            "machine_labeled_pages": self.machine_labeled_pages,
+        }
+
+    @property
     def pending(self):
         return self.human_labeled_stamps and self.human_labeled_pages and \
                self.machine_labeled_stamps and self.machine_labeled_pages
