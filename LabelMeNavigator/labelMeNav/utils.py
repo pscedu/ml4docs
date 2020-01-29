@@ -57,3 +57,16 @@ def machine_labeled_updater():
 
     models.Image.objects.update_statuses(machine_labeled_stamps=machine_labeled_stamps,
                                          machine_labeled_pages=machine_labeled_pages)
+
+
+def clean_post_data(data):
+    for key, value in data.items():
+        if value or value == '':
+            value = value.strip()
+            if value in ('True', 'true'):
+                data[key] = True
+            elif value in ('False', 'false'):
+                data[key] = False
+            elif value in ('', 'None'):
+                data[key] = None
+    return data
