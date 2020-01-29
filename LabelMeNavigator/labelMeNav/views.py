@@ -68,6 +68,7 @@ class SetStatus(View):
             if page:
                 models.Image.objects.filter(image_name=image_name).update(human_labeled_pages=True)
 
+            image.refresh_from_db()
             return JsonResponse(image.status_dict, status=200, safe=False)
         else:
             # HTTP_412_PRECONDITION_FAILED
