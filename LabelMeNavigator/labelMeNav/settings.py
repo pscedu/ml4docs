@@ -25,8 +25,12 @@ SECRET_KEY = '#ai=%@1)fti396es7%)@q7$cy8co%+1^pxil$yse&k#yuruywl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'julian-b450-i-aorus-pro-wifi.wifi.cmu.edu',]
 
+CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_WHITELIST = (
+    'http://julian-b450-i-aorus-pro-wifi.wifi.cmu.edu',
+)
 
 # Application definition
 
@@ -37,10 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'labelMeNav'
+    'labelMeNav',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
