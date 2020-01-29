@@ -9,7 +9,7 @@ Machine Learning for Docs projects developed in collaboration with Prof. Raja Ad
        |── images
              └── *.jpg (389 images, only 108 have annotations)
 
-/pylon5/pscstaff/myilmaz/Stamps_Data is where the predicted machine-annotated images (1800x1200) will be located in labelme format. There are currently 282 images files and matching xml files. All have annotated stamps but not pages.
+/pylon5/pscstaff/myilmaz/Stamps_Data is where the predicted machine-annotated images (1800x1200) will be located in labelme format. There are currently 282 images files and matching xml files. All have annotated stamps but no page annotations.
 
 ├── Stamps_Data
        |-- campaign0
