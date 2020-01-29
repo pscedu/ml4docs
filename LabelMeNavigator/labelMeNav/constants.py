@@ -5,8 +5,8 @@ MACHINE_PAGES_COMPLETE = (0, 153, 255)
 PENDING = (0, 0, 0)
 color_code = (HUMAN_STAMPS_COMPLETE, HUMAN_PAGES_COMPLETE, MACHINE_STAMPS_COMPLETE, MACHINE_PAGES_COMPLETE, PENDING)
 
-IMAGES_DIR_PATH = "/Users/juran/Downloads/unsamples"
-NEW_ANNOTATIONS_DIR_PATH = "/Users/juran/Downloads/unsamples"
+IMAGES_DIR_PATH = "/var/www/html/LabelMeAnnotationTool/Images/Stamps"
+NEW_ANNOTATIONS_DIR_PATH = "/var/www/html/LabelMeAnnotationTool/Annotations/Stamps"
 LABELME_DIR_NAME = "Birds"
 
 MACHINE_LABELED_STAMPS_PREFIX = "mls_"
