@@ -1,6 +1,8 @@
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
 import labelMeNav.constants as constants
 import labelMeNav.models as models
@@ -48,3 +50,25 @@ class GetStatus(View):
             return JsonResponse(image.status_dict, safe=False)
         else:
             return JsonResponse({}, safe=False)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class SetStatus(View):
+    def post(self, request) -> JsonResponse:
+        request.POST = utils.clean_post_data(request.POST.copy())
+
+        stamp = request.POST.get("stamp", False)
+        page = request.POST.get("page", False)
+        image_name = request.POST.get("image_name", False)
+
+        image = models.Image.objects.filter(image_name=image_name).first()
+        if image and (stamp or page):
+            if stamp:
+                models.Image.objects.filter(image_name=image_name).update(human_labeled_stamps=True)
+            if page:
+                models.Image.objects.filter(image_name=image_name).update(human_labeled_pages=True)
+
+            return JsonResponse(image.status_dict, status=200, safe=False)
+        else:
+            # HTTP_412_PRECONDITION_FAILED
+            return JsonResponse({}, status=412, safe=False)
