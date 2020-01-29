@@ -7,7 +7,7 @@ color_code = (HUMAN_STAMPS_COMPLETE, HUMAN_PAGES_COMPLETE, MACHINE_STAMPS_COMPLE
 
 IMAGES_DIR_PATH = "/var/www/html/LabelMeAnnotationTool/Images/Stamps"
 NEW_ANNOTATIONS_DIR_PATH = "/var/www/html/LabelMeAnnotationTool/Annotations/Stamps"
-LABELME_DIR_NAME = "Birds"
+LABELME_DIR_NAME = "Stamps"
 
 MACHINE_LABELED_STAMPS_PREFIX = "mls_"
 MACHINE_LABELED_PAGES_PREFIX = "mlp_"
