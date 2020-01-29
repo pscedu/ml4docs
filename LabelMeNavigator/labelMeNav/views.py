@@ -1,8 +1,10 @@
+import json
+
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
 
 import labelMeNav.constants as constants
 import labelMeNav.models as models
@@ -55,7 +57,7 @@ class GetStatus(View):
 @method_decorator(csrf_exempt, name='dispatch')
 class SetStatus(View):
     def post(self, request) -> JsonResponse:
-        request.POST = utils.clean_post_data(request.POST.copy())
+        request.POST = utils.clean_post_data(json.loads(request.body.decode('utf-8')))
 
         stamp = request.POST.get("stamp", False)
         page = request.POST.get("page", False)

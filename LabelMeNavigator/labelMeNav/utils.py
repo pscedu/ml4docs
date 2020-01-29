@@ -62,7 +62,8 @@ def machine_labeled_updater():
 def clean_post_data(data):
     for key, value in data.items():
         if value or value == '':
-            value = value.strip()
+            if isinstance(value, str):
+                value = value.strip()
             if value in ('True', 'true'):
                 data[key] = True
             elif value in ('False', 'false'):
