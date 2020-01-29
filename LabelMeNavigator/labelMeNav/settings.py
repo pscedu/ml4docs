@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '128.237.217.242', '128.182.108.141',
                  'vm041.bridges.psc.edu', 'julian-b450-i-aorus-pro-wifi.wifi.cmu.edu', ]
