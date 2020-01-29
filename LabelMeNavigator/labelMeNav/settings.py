@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -25,11 +24,13 @@ SECRET_KEY = '#ai=%@1)fti396es7%)@q7$cy8co%+1^pxil$yse&k#yuruywl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'julian-b450-i-aorus-pro-wifi.wifi.cmu.edu',]
+ALLOWED_HOSTS = ['127.0.0.1', '128.237.217.242', '128.182.108.141',
+                 'vm041.bridges.psc.edu', 'julian-b450-i-aorus-pro-wifi.wifi.cmu.edu', ]
 
-CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
     'http://julian-b450-i-aorus-pro-wifi.wifi.cmu.edu',
+    'http://vm041.bridges.psc.edu',
 )
 
 # Application definition
@@ -77,7 +78,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'labelMeNav.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -87,7 +87,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -107,7 +106,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -120,7 +118,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
