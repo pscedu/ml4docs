@@ -17,7 +17,7 @@ Machine Learning for Docs projects developed in collaboration with Prof. Raja Ad
 
        |--original_stamps_annotated
            |-- images
-                |--train2017
+                |--train2017 (1200x1800)
        |-- Stage1
           |--- predicted012320
        
