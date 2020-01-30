@@ -15,6 +15,9 @@ Machine Learning for Docs projects developed in collaboration with Prof. Raja Ad
 
 ├── Stamps_Data
 
+       |--original_stamps_annotated
+           |-- images
+                |--train2017
        |-- Stage1
           |--- predicted012320
        
