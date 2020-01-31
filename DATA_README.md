@@ -15,9 +15,6 @@ Machine Learning for Docs projects developed in collaboration with Prof. Raja Ad
 
 ├── Stamps_Data
 
-       |--original_stamps_annotated
-           |-- images
-                |--train2017 (1200x1800)
        |-- Stage1
           |--- predicted012320
        
@@ -27,6 +24,6 @@ Machine Learning for Docs projects developed in collaboration with Prof. Raja Ad
                   └── *.jpg (282 images)
                   
                   
-/pylon5/pscstaff/myilmaz/Stamps_Data/original_stamps_images is the location of the original 100 training images but resized to 1200x1800. There are no annotations in this folder, just images, although these images were annotated when they were a larger size (6000x4000). These images can be used for adding page annotations using LabelMe.
+/pylon5/pscstaff/myilmaz/Stamps_Data/original_stamps_images is the location of the original 100 training images but resized to 1200x1800. There are no annotations in this folder, just images, although these images were human-annotated for stamps when they were a larger size (6000x4000). These images can be used for adding page annotations using LabelMe.
                   
 
