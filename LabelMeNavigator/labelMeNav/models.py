@@ -23,16 +23,16 @@ class ImageManager(models.Manager):
             self.update_or_create(image_name=image, machine_labeled_pages=True)
 
     def labeled_stamps(self):
-        return self.filter(human_labeled_stamps=True)
+        return self.filter(human_labeled_stamps=True).order_by('image_name')
 
     def pending_stamps(self):
-        return self.filter(human_labeled_stamps=False, machine_labeled_stamps=False)
+        return self.filter(human_labeled_stamps=False, machine_labeled_stamps=False).order_by('image_name')
 
     def labeled_pages(self):
-        return self.filter(human_labeled_pages=True)
+        return self.filter(human_labeled_pages=True).order_by('image_name')
 
     def pending_pages(self):
-        return self.filter(human_labeled_pages=False, machine_labeled_pages=False)
+        return self.filter(human_labeled_pages=False, machine_labeled_pages=False).order_by('image_name')
 
     def get_next_pending_images(self):
         labeled_stamps = self.labeled_stamps()
