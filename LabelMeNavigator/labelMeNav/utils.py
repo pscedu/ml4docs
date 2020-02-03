@@ -25,7 +25,9 @@ def machine_labeled_updater():
     # Get newly labeled file names
     machine_labeled_stamps = []
     machine_labeled_pages = []
-    files = get_image_names(directory=constants.NEW_ANNOTATIONS_DIR_PATH)
+    human_labeled_stamps = []
+    human_labeled_pages = []
+    files = get_image_names(directory=constants.NEW_ANNOTATIONS_INPUT_FOLDER)
 
     # Parse the file names and divide them into stamps or pages. Removing prefix as it is not necessary after this.
     for file in files:
@@ -35,25 +37,46 @@ def machine_labeled_updater():
         elif "".startswith(constants.MACHINE_LABELED_PAGES_PREFIX):
             file.replace(constants.MACHINE_LABELED_PAGES_PREFIX, "")
             machine_labeled_pages.append(file)
+        elif "".startswith(constants.HUMAN_LABELED_STAMPS_PREFIX):
+            file.replace(constants.HUMAN_LABELED_STAMPS_PREFIX, "")
+            human_labeled_stamps.append(file)
+        elif "".startswith(constants.HUMAN_LABELED_PAGES_PREFIX):
+            file.replace(constants.HUMAN_LABELED_PAGES_PREFIX, "")
+            human_labeled_pages.append(file)
 
     # Move the files to the Annotations folder. Keep track of mv errors. Object updates will not be performed on those.
     error_list = []
     for file in list(machine_labeled_stamps):
-        result = shutil.move(src=constants.NEW_ANNOTATIONS_DIR_PATH + '/'
-                                 + constants.MACHINE_LABELED_STAMPS_PREFIX + '/' + file + ".jpg",
-                             dst=constants.IMAGES_DIR_PATH + '/')
+        result = shutil.move(
+            src=constants.NEW_ANNOTATIONS_INPUT_FOLDER + '/' + constants.MACHINE_LABELED_STAMPS_PREFIX + '/' + file + ".jpg",
+            dst=constants.IMAGES_DIR_PATH + '/')
         if not result:
             error_list.append(file)
             machine_labeled_stamps.remove(file)
 
-    error_list = []
     for file in list(machine_labeled_pages):
-        result = shutil.move(src=constants.NEW_ANNOTATIONS_DIR_PATH + '/'
-                                 + constants.MACHINE_LABELED_PAGES_PREFIX + '/' + file + ".jpg",
-                             dst=constants.IMAGES_DIR_PATH + '/')
+        result = shutil.move(
+            src=constants.NEW_ANNOTATIONS_INPUT_FOLDER + '/' + constants.MACHINE_LABELED_PAGES_PREFIX + '/' + file + ".jpg",
+            dst=constants.IMAGES_DIR_PATH + '/')
         if not result:
             error_list.append(file)
             machine_labeled_pages.remove(file)
+
+    for file in list(human_labeled_stamps):
+        result = shutil.move(
+            src=constants.NEW_ANNOTATIONS_INPUT_FOLDER + '/' + constants.HUMAN_LABELED_STAMPS_PREFIX + '/' + file + ".jpg",
+            dst=constants.IMAGES_DIR_PATH + '/')
+        if not result:
+            error_list.append(file)
+            human_labeled_stamps.remove(file)
+
+    for file in list(human_labeled_pages):
+        result = shutil.move(
+            src=constants.NEW_ANNOTATIONS_INPUT_FOLDER + '/' + constants.HUMAN_LABELED_PAGES_PREFIX + '/' + file + ".jpg",
+            dst=constants.IMAGES_DIR_PATH + '/')
+        if not result:
+            error_list.append(file)
+            human_labeled_pages.remove(file)
 
     models.Image.objects.update_statuses(machine_labeled_stamps=machine_labeled_stamps,
                                          machine_labeled_pages=machine_labeled_pages)
