@@ -28,4 +28,4 @@ Machine Learning for Docs projects developed in collaboration with Prof. Raja Ad
                   
 /pylon5/pscstaff/myilmaz/Stamps_Data/stamps_images-1800x1200 is the location of the original 100 training images but resized to 1200x1800. All of these images have annotations.There are no annotations in this folder, just images, but these images were human-annotated for stamps so annotations are available in the 'labelme' folder above. These images can be used for adding page annotations using LabelMe.
                   
-/pylon5/pscstaff/myilmaz/Stamps_Data/stage2/selection These are the new machine-annotated stamps images (1800x1200) that have been selected to have stamps corrected and page annotations added using Labelme. They will be used for training data in Stage 2.
+/pylon5/pscstaff/myilmaz/Stamps_Data/stage2/selection These are the new machine-annotated stamps images (1800x1200) that have been selected to have stamps corrected and page annotations added using Labelme. They will be used for training data in Stage 2. They have new names.
