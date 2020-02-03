@@ -23,4 +23,5 @@ urlpatterns = [
     path('update-db', views.UpdateDb.as_view()),
     path('get-status/<str:image_name>', views.GetStatus.as_view()),
     path('set-status', views.SetStatus.as_view()),
+    path('load-new-annotations', views.LoadNewAnnotations.as_view()),
 ]

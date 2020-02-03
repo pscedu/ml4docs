@@ -16,7 +16,7 @@ class Home(View):
         template = loader.get_template('home.html')
         pending_context = models.Image.objects.get_next_pending_images()
         other_constants = {
-            "folder_name": constants.LABELME_DIR_NAME,
+            "folder_name": constants.DATASET_NAME,
             # "default_domain": request.build_absolute_uri()
             "default_domain": "http://vm041.bridges.psc.edu/"
         }
@@ -75,3 +75,9 @@ class SetStatus(View):
         else:
             # HTTP_412_PRECONDITION_FAILED
             return JsonResponse({}, status=412, safe=False)
+
+
+class LoadNewAnnotations(View):
+    def get(self, request):
+        result_dict = utils.machine_labeled_updater()
+        return JsonResponse(result_dict, safe=False)

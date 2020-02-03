@@ -4,11 +4,23 @@ from labelMeNav import constants
 
 
 class ImageManager(models.Manager):
-    def update_statuses(self, machine_labeled_stamps: list = None, machine_labeled_pages: list = None):
-        if machine_labeled_stamps:
-            self.filter(image_name__in=machine_labeled_stamps).update(machine_stamps_complete=True)
-        elif machine_labeled_pages:
-            self.filter(image_name__in=machine_labeled_pages).update(machine_pages_complete=True)
+    def update_statuses(self,
+                        machine_labeled_stamps: list = None,
+                        machine_labeled_pages: list = None,
+                        human_labeled_stamps: list = None,
+                        human_labeled_pages: list = None):
+
+        for image in machine_labeled_stamps:
+            self.update_or_create(image_name=image, human_labeled_stamps=True)
+
+        for image in machine_labeled_pages:
+            self.update_or_create(image_name=image, human_labeled_pages=True)
+
+        for image in human_labeled_stamps:
+            self.update_or_create(image_name=image, machine_labeled_stamps=True)
+
+        for image in human_labeled_pages:
+            self.update_or_create(image_name=image, machine_labeled_pages=True)
 
     def labeled_stamps(self):
         return self.filter(human_labeled_stamps=True)
