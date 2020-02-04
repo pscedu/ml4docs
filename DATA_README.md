@@ -16,6 +16,7 @@ https://pitt-my.sharepoint.com/personal/rajaadal_pitt_edu/_layouts/15/onedrive.a
 # Our Original Dataset: 
 Contains: 389 JPEG Images 6000x4000
 Contains: 126 XML HLS Annotations for 108 image files
+
 /pylon5/hm5fp1p/data/ is the location of the original 6000x4000 images we saved on Pylon5 to use for training the model. About 108 of them have human-annotated stamps in labelme format and the rest are unannotated. The annotated and unannotated images are mixed together in one image folder. There are a total of 388 jpeg files. The annotations are xml files. There are 126 XMl files.
 
 /pylon5/pscstaff/myilmaz/Stamps_Data/labelme Is the above dataset in 1800x1200.
