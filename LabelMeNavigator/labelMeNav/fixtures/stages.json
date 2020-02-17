@@ -1,0 +1,1 @@
+[{"model": "labelMeNav.stage", "pk": 1, "fields": {"name": "stage2", "enabled": false}}, {"model": "labelMeNav.stage", "pk": 2, "fields": {"name": "stage3", "enabled": true}}]
