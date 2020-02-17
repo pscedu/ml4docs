@@ -2,6 +2,9 @@ from django.db import models
 
 from labelMeNav import constants
 
+class Stage(models.Model):
+    name = models.CharField(default="", max_length=64)
+    enabled = models.BooleanField(default=True)
 
 class ImageManager(models.Manager):
     def update_statuses(self,
@@ -22,17 +25,20 @@ class ImageManager(models.Manager):
         for image in human_labeled_pages:
             self.update_or_create(image_name=image, machine_labeled_pages=True)
 
+    #def filter_queryset(self):
+    #    return super().filter_queryset().filter(stage__enabled=True)
+
     def labeled_stamps(self):
-        return self.filter(human_labeled_stamps=True).order_by('image_name')
+        return self.filter(stage__enabled=True, human_labeled_stamps=True).order_by('image_name')
 
     def pending_stamps(self):
-        return self.filter(human_labeled_stamps=False, machine_labeled_stamps=False).order_by('image_name')
+        return self.filter(stage__enabled=True, human_labeled_stamps=False, machine_labeled_stamps=False).order_by('image_name')
 
     def labeled_pages(self):
-        return self.filter(human_labeled_pages=True).order_by('image_name')
+        return self.filter(stage__enabled=True, human_labeled_pages=True).order_by('image_name')
 
     def pending_pages(self):
-        return self.filter(human_labeled_pages=False, machine_labeled_pages=False).order_by('image_name')
+        return self.filter(stage__enabled=True, human_labeled_pages=False, machine_labeled_pages=False).order_by('image_name')
 
     def get_next_pending_images(self):
         labeled_stamps = self.labeled_stamps()
@@ -48,16 +54,16 @@ class ImageManager(models.Manager):
         pending_pages_count = pending_pages.count()
 
         context = {
-            "labeled_stamps": labeled_stamps[:10],
+            "labeled_stamps": labeled_stamps,
             "labeled_stamps_count": labeled_stamps_count,
 
-            "pending_stamps": pending_stamps[:10],
+            "pending_stamps": pending_stamps,
             "pending_stamps_count": pending_stamps_count,
 
-            "labeled_pages": labeled_pages[:10],
+            "labeled_pages": labeled_pages,
             "labeled_pages_count": labeled_pages_count,
 
-            "pending_pages": pending_pages[:10],
+            "pending_pages": pending_pages,
             "pending_pages_count": pending_pages_count,
         }
         return context
@@ -70,6 +76,7 @@ class Image(models.Model):
     human_labeled_pages = models.BooleanField(default=False)
     machine_labeled_stamps = models.BooleanField(default=False)
     machine_labeled_pages = models.BooleanField(default=False)
+    stage = models.ForeignKey(Stage, on_delete=models.PROTECT)
 
     objects = ImageManager()
 
