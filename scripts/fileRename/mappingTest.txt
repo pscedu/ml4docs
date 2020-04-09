@@ -1,4 +1,6 @@
-oldFile1 newFile1
-oldFile2 -
-oldFile3 newFile3
-oldFile4 -
+oldFile1.jpg newFile1.jpg
+oldFile2.jpg -
+oldFile3.jpg newFile3.jpg
+oldFile4.jpg -
+- newFile5.jpg
+

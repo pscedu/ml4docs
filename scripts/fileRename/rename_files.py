@@ -29,14 +29,15 @@ def loadMappingFile(filename):
     dic = {}
     with open(filename) as f:
        for line in f:
-          (key, val) = line.split()
-          dic[key] = val
+          if len(line.split()) == 2:
+              (key, val) = line.split()
+              dic[key] = val
     return dic
 
 def listFilesInFolder(folderPath):
 
     files = []
-    folderpath = folderPath + "\images"
+    folderpath = folderPath + "\Images"
     for r, d, f in os.walk(folderPath):
         #for file in f:
         files = f
@@ -45,13 +46,13 @@ def listFilesInFolder(folderPath):
 
 def copyAndRenameFile(oldDir, oldFileName, newDir, newFileName):
     
-    newImagePath=newDir+"images/"+newFileName
-    oldImagePath=oldDir+"images/"+oldFileName
+    newImagePath=newDir+"Images/"+newFileName
+    oldImagePath=oldDir+"Images/"+oldFileName
 
     newFileRoot = newFileName.split(".")[0]
     oldFileRoot = oldFileName.split(".")[0]
-    newAnnotationsFile=newDir+"annotations/"+newFileRoot+".xml"
-    oldAnnotationsFile=oldDir+"annotations/"+oldFileRoot+".xml"
+    newAnnotationsFile=newDir+"Annotations/"+newFileRoot+".xml"
+    oldAnnotationsFile=oldDir+"Annotations/"+oldFileRoot+".xml"
 
     # Copying the image
     if not os.path.exists(newImagePath):  # folder exists, file does not
@@ -76,6 +77,7 @@ def copyAndRenameFile(oldDir, oldFileName, newDir, newFileName):
 
 def renameFiles(dic, oldFilesList, oldDir, newDir):
     
+    nFilesRenamed = 0
     for f in oldFilesList:
         #print (f, dic)
         if f in dic:
@@ -84,11 +86,13 @@ def renameFiles(dic, oldFilesList, oldDir, newDir):
                 oldFileName=f
                 print("Moving and renaming file: ", oldFileName, newFileName)
                 copyAndRenameFile(oldDir, oldFileName, newDir, newFileName)
- 
+                nFilesRenamed += 1
+
+    print("------> Files renamed: ", nFilesRenamed)
 
 def main():
     """ Main entry point of the app """
-    print("hello world")
+    print("Renaming files")
     args = parseArgs()
     mappingFile = args.mapFile
     oldDir = args.oldFolder
