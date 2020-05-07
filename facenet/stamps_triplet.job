@@ -1,0 +1,24 @@
+#!/bin/bash
+
+source /etc/profile.d/modules.sh
+
+#python src/train_softmax.py --logs_base_dir ~/logs/facenet/  --models_base_dir /facenetmodels --data_dir /stamps-dataset-split/train/ --image_size 160 --model_def squeezenet --optimizer ADAM --learning_rate -1 --max_nrof_epochs 10 --keep_probability 0.8 --random_crop --random_flip --use_fixed_image_standardization --learning_rate_schedule_file data/learning_rate_schedule_classifier_casia.txt --weight_decay 5e-4  --embedding_size 512  --lfw_distance_metric 1 --lfw_use_flipped_images 
+
+python src/train_tripletloss.py \
+--logs_base_dir /facenet/tripletloss_logs \
+--models_base_dir /facenetmodels/tripletloss \
+--pretrained_model /home/rajanie/facenet/models/20180402-114759/20180402-114759.pb \
+--data_dir /dataset-stamps/output/train \
+--max_nrof_epochs 200 \
+--batch_size 3 \
+--image_size 160 \
+--epoch_size 100 \
+--embedding_size 128 \
+--random_flip \
+--learning_rate 0.1 \
+--optimizer ADAM \
+--weight_decay 5e-4 \
+--keep_probability 0.8 \
+--people_per_batch 3 \
+--images_per_person 5 
+#--learning_rate_schedule_file data/learning_rate_schedule_classifier_casia.txt \
