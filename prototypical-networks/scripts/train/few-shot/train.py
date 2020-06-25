@@ -26,7 +26,7 @@ def main(opt):
         json.dump(opt, f)
         f.write('\n')
 
-    trace_file = os.path.join(opt['log.exp_dir'], 'trace.txt')
+    trace_file = os.path.join(opt['log.exp_dir'], 'trace5.txt')
 
     # Postprocess arguments
     opt['model.x_dim'] = list(map(int, opt['model.x_dim'].split(',')))
@@ -101,7 +101,8 @@ def main(opt):
                 print("==> best model (loss = {:0.6f}), saving model...".format(hook_state['best_loss']))
 
                 state['model'].cpu()
-                torch.save(state['model'], os.path.join(opt['log.exp_dir'], 'best_model.pt'))
+                torch.save(state['model'], os.path.join(opt['log.exp_dir'], 'best_model_5.pt'))
+                #torch.save(state['model.state_dict()'], os.path.join(opt['log.exp_dir'], 'best_model_dict.pth'))
                 if opt['data.cuda']:
                     state['model'].cuda()
 
@@ -114,7 +115,8 @@ def main(opt):
                     state['stop'] = True
         else:
             state['model'].cpu()
-            torch.save(state['model'], os.path.join(opt['log.exp_dir'], 'best_model.pt'))
+            torch.save(state['model'], os.path.join(opt['log.exp_dir'], 'best_model_5.pt'))
+            #torch.save(state['model.state_dict()'], os.path.join(opt['log.exp_dir'], 'best_model_dict.pth'))
             if opt['data.cuda']:
                 state['model'].cuda()
 

@@ -11,7 +11,7 @@ import protonets.utils.data as data_utils
 import protonets.utils.model as model_utils
 
 
-def main(opt):
+def main(opt, inference=False):
     # load model
     model = torch.load(opt['model.model_path'])
     model.eval()
@@ -55,17 +55,21 @@ def main(opt):
 
     if data_opt['data.cuda']:
         model.cuda()
-        
-    # with torch.no_grad():
+    
+        # with torch.no_grad():
     #     out_data = model.(data)
     #     print(out_data)
 
     meters = { field: tnt.meter.AverageValueMeter() for field in model_opt['log.fields'] }
 
-    model_utils.evaluate(model, data['test'], meters, desc="test")
+    if inference==True:
+        model_utils.inference(model, data['test'], meters, desc="test")
+    else:
+        model_utils.evaluate(model, data['test'], meters, desc="test")
 
     for field,meter in meters.items():
         mean, std = meter.value()
         print("test {:s}: {:0.6f} +/- {:0.6f}".format(field, mean, 1.96 * std / math.sqrt(data_opt['data.test_episodes'])))
 
-   
+
+
