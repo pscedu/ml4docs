@@ -290,11 +290,26 @@ class model ():
                 self.total_logits = torch.cat((self.total_logits, self.logits))
                 self.total_labels = torch.cat((self.total_labels, labels))
                 self.total_paths = np.concatenate((self.total_paths, paths))
+        
+       # print(self.total_logits.shape)
+        probs, preds = F.softmax(self.total_logits.detach(), dim=1).topk(k=5,dim=1)#.max(dim=1)
+        batch_size = self.total_labels.size(0)
 
-        probs, preds = F.softmax(self.total_logits.detach(), dim=1).max(dim=1)
-        #print("Probs:  ",probs)
-        #print("Pred: ", preds)
-        #print("labels: ",self.total_labels)
+        _, pred = self.total_logits.topk(5, 1, True, True)
+        pred = pred.t()
+        correct = pred.eq(self.total_labels.view(1, -1).expand_as(pred))
+
+        #for k in topk:
+        correct_k = correct[:5].view(-1).float().sum(0)
+        res = (correct_k.mul_(100.0 / batch_size)).item()
+        print("Accuracy :", res)
+        self.eval_acc_mic_top1 = res 
+
+        for i in range(5000):
+            #print("Probs:  ",probs[i])
+            #print("Pred: ", preds[i])
+            print("Path: ", self.total_paths[i], preds[i], probs[i])
+            print("Label: ", self.total_labels[i])
         #print(classification_report(self.total_labels, preds))
         
         if openset:
@@ -304,33 +319,33 @@ class model ():
             print('\n\nOpenset Accuracy: %.3f' % self.openset_acc)
 
         # Calculate the overall accuracy and F measurement
-        self.eval_acc_mic_top1= mic_acc_cal(preds[self.total_labels != -1],
-                                            self.total_labels[self.total_labels != -1])
-        self.eval_f_measure = F_measure(preds, self.total_labels, openset=openset,
-                                        theta=self.training_opt['open_threshold'])
-        self.many_acc_top1, \
-        self.median_acc_top1, \
-        self.low_acc_top1 = shot_acc(preds[self.total_labels != -1],
-                                     self.total_labels[self.total_labels != -1], 
-                                     self.data['train'])
+        #self.eval_acc_mic_top1= mic_acc_cal(preds[self.total_labels != -1],
+        #                                    self.total_labels[self.total_labels != -1])
+        #self.eval_f_measure = F_measure(preds, self.total_labels, openset=openset,
+        #                                theta=self.training_opt['open_threshold'])
+        #self.many_acc_top1, \
+        #self.median_acc_top1, \
+        #self.low_acc_top1 = shot_acc(preds[self.total_labels != -1],
+        #                             self.total_labels[self.total_labels != -1], 
+        #                             self.data['train'])
         # Top-1 accuracy and additional string
-        print_str = ['\n\n',
-                     'Phase: %s' 
-                     % (phase),
-                     '\n\n',
-                     'Evaluation_accuracy_micro_top1: %.3f' 
-                     % (self.eval_acc_mic_top1),
-                     '\n',
-                     'Averaged F-measure: %.3f' 
-                     % (self.eval_f_measure),
-                     '\n',
-                     'Many_shot_accuracy_top1: %.3f' 
-                     % (self.many_acc_top1),
-                     'Median_shot_accuracy_top1: %.3f' 
-                     % (self.median_acc_top1),
-                     'Low_shot_accuracy_top1: %.3f' 
-                     % (self.low_acc_top1),
-                     '\n']
+        #print_str = ['\n\n',
+        #             'Phase: %s' 
+        #             % (phase),
+        #             '\n\n',
+        #             'Evaluation_accuracy_micro_top1: %.3f' 
+        #             % (self.eval_acc_mic_top1),
+        #             '\n',
+        #             'Averaged F-measure: %.3f' 
+        #             % (self.eval_f_measure),
+        #             '\n',
+        #             'Many_shot_accuracy_top1: %.3f' 
+        #             % (self.many_acc_top1),
+        #             'Median_shot_accuracy_top1: %.3f' 
+        #             % (self.median_acc_top1),
+        #             'Low_shot_accuracy_top1: %.3f' 
+        #             % (self.low_acc_top1),
+        #             '\n']
 
         if phase == 'val':
             print_write(print_str, self.log_file)

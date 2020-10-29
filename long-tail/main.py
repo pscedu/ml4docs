@@ -9,7 +9,7 @@ from utils import source_import
 # ================
 # LOAD CONFIGURATIONS
 
-data_root = {'ImageNet': '/MLStamps/long-tail/OpenLongTailRecognition-OLTR/OLTRDataset/OLTRDataset_1/campaign3to5',
+data_root = {'ImageNet': '/MLStamps/long-tail/OpenLongTailRecognition-OLTR/OLTRDataset/OLTRDataset_1/campaign3to5_256',
              'Places': '/home/public/dataset/Places365'}
 
 parser = argparse.ArgumentParser()
@@ -74,6 +74,7 @@ else:
     training_model = model(config, data, test=True)
     training_model.load_model()
     training_model.eval(phase='test', openset=test_open)
+    #print(training_model)
     
     if output_logits:
         training_model.output_logits(openset=test_open)

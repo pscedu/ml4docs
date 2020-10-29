@@ -24,8 +24,8 @@ class ModulatedAttLayer(nn.Module):
         self.conv_mask = nn.Conv2d(self.inter_channels, self.in_channels, kernel_size = 1, bias=False)
         self.relu = nn.ReLU(inplace=True)
 
-        self.avgpool = nn.AvgPool2d(5, stride=1)
-        self.fc_spatial = nn.Linear(5 * 5 * self.in_channels, 5 * 5)
+        self.avgpool = nn.AvgPool2d(7, stride=1)
+        self.fc_spatial = nn.Linear(7 * 7 * self.in_channels, 7 * 7)
         # self.fc_channel = nn.Linear(7 * 7 * self.in_channels, self.in_channels)
         # self.fc_selector = nn.Linear(7 * 7 * self.in_channels, 1)
 
@@ -58,12 +58,12 @@ class ModulatedAttLayer(nn.Module):
         map_ = map_.view(batch_size, self.inter_channels, x.size(2), x.size(3))
         mask = self.conv_mask(map_)
         
-        x_flatten = x.view(-1, 5 * 5 * self.in_channels)
+        x_flatten = x.view(-1, 7 * 7 * self.in_channels)
         
         spatial_att = self.fc_spatial(x_flatten)
         spatial_att = spatial_att.softmax(dim=1)
 
-        spatial_att = spatial_att.view(-1, 5, 5).unsqueeze(1)
+        spatial_att = spatial_att.view(-1, 7, 7).unsqueeze(1)
         spatial_att = spatial_att.expand(-1, self.in_channels, -1, -1)
 
         final = spatial_att * mask + x
