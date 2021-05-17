@@ -9,11 +9,11 @@ from utils import source_import
 # ================
 # LOAD CONFIGURATIONS
 
-data_root = {'ImageNet': '/MLStamps/long-tail/OpenLongTailRecognition-OLTR/OLTRDataset/OLTRDataset_1/campaign3to5_256',
-             'Places': '/home/public/dataset/Places365'}
+data_root = {'ImageNet': '/Path/to/Dataset/campaign3to5_256',
+             'Places': '/Path/to/Dataset/Places365'}
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--config', default='/MLStamps/long-tail/OpenLongTailRecognition-OLTR/config/Imagenet_LT/Stage_1.py', type=str)
+parser.add_argument('--config', default='config/Imagenet_LT/Stage_1.py', type=str)
 parser.add_argument('--test', default=False, action='store_true')
 parser.add_argument('--test_open', default=False, action='store_true')
 parser.add_argument('--output_logits', default=False)
