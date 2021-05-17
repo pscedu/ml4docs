@@ -2,7 +2,7 @@
 from PIL import Image
 import os, sys
 
-dir = "/MLStamps/long-tail/OpenLongTailRecognition-OLTR/combined-200-stamps-6Kx4K-croppedStamps"
+dir = "/Path/to/dataset/combined-200-stamps-6Kx4K-croppedStamps"
 
 def resize():
     count = 0
