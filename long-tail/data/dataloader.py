@@ -57,7 +57,7 @@ class LT_Dataset(Dataset):
 # Load datasets
 def load_data(data_root, dataset, phase, batch_size, sampler_dic=None, num_workers=4, test_open=False, shuffle=True):
     
-    txt = '/MLStamps/long-tail/OpenLongTailRecognition-OLTR/OLTRDataset/OLTRDataset_1/%s.txt'%( (phase if phase != 'train_plain' else 'train'))
+    txt = '/Path/to/Dataset/MLStamps/long-tail/OpenLongTailRecognition-OLTR/OLTRDataset/OLTRDataset_1/%s.txt'%( (phase if phase != 'train_plain' else 'train'))
 
     print('Loading data from %s' % (txt))
 
@@ -71,9 +71,9 @@ def load_data(data_root, dataset, phase, batch_size, sampler_dic=None, num_worke
     set_ = LT_Dataset(data_root, txt, transform)
 
     if phase == 'test' and test_open:
-        open_txt = '/MLStamps/long-tail/OpenLongTailRecognition-OLTR/OLTRDataset/OLTRDataset_1/open.txt'
+        open_txt = '/Path/to/Dataset/MLStamps/long-tail/OpenLongTailRecognition-OLTR/OLTRDataset/OLTRDataset_1/open.txt'
         print('Testing with opensets from %s'%(open_txt))
-        open_set_ = LT_Dataset('/MLStamps/long-tail/OpenLongTailRecognition-OLTR/OLTRDataset/OLTRDataset_1/campaign3to5',open_txt, transform)
+        open_set_ = LT_Dataset('/Path/to/DatasetMLStamps/long-tail/OpenLongTailRecognition-OLTR/OLTRDataset/OLTRDataset_1/campaign3to5',open_txt, transform)
         set_ = ConcatDataset([set_, open_set_])
 
     if sampler_dic and phase == 'train':
