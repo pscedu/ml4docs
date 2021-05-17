@@ -11,11 +11,11 @@ from utils import source_import
 # ================
 # LOAD CONFIGURATIONS
 
-data_root = {'ImageNet': '/MLStamps/long-tail/OpenLongTailRecognition-OLTR/OLTRDataset/OLTRDataset_1',
-             'Places': '/home/public/dataset/Places365'}
+data_root = {'ImageNet': '/Path/to/dataset/OLTRDataset',
+             'Places': '/Path/to/dataset/Places365'}
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--config', default='/MLStamps/long-tail/OpenLongTailRecognition-OLTR/config/Imagenet_LT/Stage_1.py', type=str)
+parser.add_argument('--config', default='/Path/to/dataset/OLTRDataset/config/Imagenet_LT/Stage_1.py', type=str)
 parser.add_argument('--test', default=False, action='store_true')
 parser.add_argument('--test_open', default=False, action='store_true')
 parser.add_argument('--output_logits', default=False)
@@ -50,8 +50,6 @@ data = {x: dataloader.load_data(data_root=data_root[dataset.rstrip('_LT')], data
                                 num_workers=training_opt['num_workers'],
                                 shuffle=False)
         for x in ['train', 'test']}
-
-#testsample="/MLStamps/long-tail/OpenLongTailRecognition-OLTR/OLTRDataset/OLTRDataset_1/campaign3to5/arita/000008927.jpg"
 
 training_model = model(config, data, test=True)
 training_model.load_model()
