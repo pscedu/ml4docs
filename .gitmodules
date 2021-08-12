@@ -1,0 +1,3 @@
+[submodule "ml4docs-automation"]
+	path = ml4docs-automation
+	url = git@github.com:pscedu/ml4docs-automation.git
