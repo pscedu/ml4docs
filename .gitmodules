@@ -4,3 +4,6 @@
 [submodule "mlstamps_oltr"]
 	path = mlstamps_oltr
 	url = git@github.com:rajanieprabha/mlstamps_oltr.git
+[submodule "shuffler"]
+	path = shuffler
+	url = git@github.com:kukuruza/shuffler.git
