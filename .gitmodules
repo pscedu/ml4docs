@@ -1,3 +1,6 @@
 [submodule "ml4docs-automation"]
 	path = ml4docs-automation
 	url = git@github.com:pscedu/ml4docs-automation.git
+[submodule "mlstamps_oltr"]
+	path = mlstamps_oltr
+	url = git@github.com:rajanieprabha/mlstamps_oltr.git
