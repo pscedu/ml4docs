@@ -7,3 +7,6 @@
 [submodule "shuffler"]
 	path = shuffler
 	url = git@github.com:kukuruza/shuffler.git
+[submodule "keras-retinanet"]
+	path = keras-retinanet
+	url = git@github.com:kukuruza/keras-retinanet.git
