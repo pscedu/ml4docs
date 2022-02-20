@@ -1,12 +1,15 @@
 [submodule "ml4docs-automation"]
 	path = ml4docs-automation
 	url = git@github.com:pscedu/ml4docs-automation.git
-[submodule "mlstamps_oltr"]
-	path = mlstamps_oltr
-	url = git@github.com:rajanieprabha/mlstamps_oltr.git
 [submodule "shuffler"]
 	path = shuffler
 	url = git@github.com:kukuruza/shuffler.git
 [submodule "keras-retinanet"]
 	path = keras-retinanet
 	url = git@github.com:kukuruza/keras-retinanet.git
+[submodule "OpenLongTailRecognition-OLTR"]
+	path = OpenLongTailRecognition-OLTR
+	url = git@github.com:pscedu/OpenLongTailRecognition-OLTR.git
+[submodule "yolov5"]
+	path = yolov5
+	url = git@github.com:kukuruza/yolov5.git
