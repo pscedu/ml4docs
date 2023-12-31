@@ -14,3 +14,6 @@
 	path = PolygonObjectDetection
 	url = git@github.com:kukuruza/PolygonObjectDetection.git
 
+[submodule "pel"]
+	path = pel
+	url = git@github.com:kukuruza/PEL.git
